@@ -17,7 +17,6 @@ from time import sleep
 import random
 import threading
 import re
-import urllib.request
 from Box2D.b2 import polygonShape
 from pygame.locals import QUIT, KEYDOWN
 from agents.agent import Agent
@@ -191,101 +190,13 @@ class Visualisation:
         self._dbg_auto_resume = None
 
     def _resolve_debug_endpoint(self):
-        if self._dbg_gui_endpoint is not None:
-            if self._dbg_gui_endpoint is False:
-                return None
-            return self._dbg_gui_endpoint
-        debug_url = "http://127.0.0.1:7778/event"
-        session_id = "gui-global-slowdown"
-        debug_enabled = False
-        env_paths = [
-            r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\gui-global-slowdown.env",
-            r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\baseline-traffic-collision.env",
-        ]
-        env_content = None
-        for env_path in env_paths:
-            try:
-                with open(env_path, "r", encoding="utf-8") as env_file:
-                    env_content = env_file.read()
-                break
-            except Exception:
-                env_content = None
-        if env_content is None:
-            self._dbg_gui_endpoint = False
-            return None
-        for line in env_content.splitlines():
-            if line.startswith("DEBUG_SERVER_URL="):
-                debug_url = line.split("=", 1)[1]
-            elif line.startswith("DEBUG_SESSION_ID="):
-                session_id = line.split("=", 1)[1]
-            elif line.startswith("DEBUG_HTTP_ENABLED="):
-                debug_enabled = line.split("=", 1)[1].strip().lower() in {"1", "true", "yes", "on"}
-        if session_id == "gui-global-slowdown":
-            debug_enabled = True
-        if session_id == "baseline-traffic-collision":
-            debug_enabled = True
-        if not debug_enabled:
-            self._dbg_gui_endpoint = False
-            return None
-        self._dbg_gui_endpoint = (debug_url, session_id)
-        return self._dbg_gui_endpoint
+        return None
 
     def _should_auto_resume_debug_session(self):
-        if self._dbg_auto_resume is not None:
-            return self._dbg_auto_resume
-        enabled = False
-        session_id = None
-        env_paths = [
-            r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\gui-global-slowdown.env",
-            r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\baseline-traffic-collision.env",
-        ]
-        for env_path in env_paths:
-            try:
-                with open(env_path, "r", encoding="utf-8") as env_file:
-                    env_content = env_file.read()
-                for line in env_content.splitlines():
-                    if line.startswith("DEBUG_SESSION_ID="):
-                        session_id = line.split("=", 1)[1].strip()
-                    if line.startswith("DEBUG_AUTO_RESUME="):
-                        enabled = line.split("=", 1)[1].strip().lower() in {"1", "true", "yes", "on"}
-                        break
-                if session_id is not None:
-                    break
-            except Exception:
-                enabled = False
-        if not enabled and session_id == "gui-global-slowdown":
-            enabled = True
-        if not enabled and session_id == "baseline-traffic-collision":
-            enabled = True
-        self._dbg_auto_resume = enabled
-        return enabled
+        return False
 
     def _debug_gui_event(self, hypothesis_id, location, message, data):
-        endpoint = self._resolve_debug_endpoint()
-        if endpoint is None:
-            return
-        debug_url, session_id = endpoint
-        try:
-            urllib.request.urlopen(
-                urllib.request.Request(
-                    debug_url,
-                    data=json.dumps(
-                        {
-                            "sessionId": session_id,
-                            "runId": "pre-fix",
-                            "hypothesisId": hypothesis_id,
-                            "location": location,
-                            "msg": message,
-                            "data": data,
-                            "ts": 0,
-                        }
-                    ).encode(),
-                    headers={"Content-Type": "application/json"},
-                ),
-                timeout=0.2,
-            ).read()
-        except Exception:
-            self._dbg_gui_endpoint = False
+        return
 
     def run(self):
         pygame.init()

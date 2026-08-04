@@ -1,17 +1,9 @@
 import csv
 import json
 import os
-import urllib.request
 import time
 from collections import defaultdict
 
-DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\v4-port-collision.env"
-DEBUG_FALLBACK_URL = "http://127.0.0.1:7778/event"
-DEBUG_SESSION_ID = "v4-port-collision"
-BASELINE_COLLISION_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\baseline-traffic-collision.env"
-BASELINE_COLLISION_DEBUG_FALLBACK_URL = "http://127.0.0.1:7777/event"
-BASELINE_COLLISION_DEBUG_SESSION_ID = "baseline-traffic-collision"
-BASELINE_COLLISION_DEBUG_LOG_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\trae-debug-log-baseline-traffic-collision.ndjson"
 from datetime import datetime
 from math import sqrt
 from uuid import uuid4
@@ -125,55 +117,6 @@ class RunMetricsRecorder(object):
                 "position": [round(getattr(getattr(entity_b, 'position', None), 'x', 0.0), 2), round(getattr(getattr(entity_b, 'position', None), 'y', 0.0), 2)] if getattr(entity_b, 'position', None) is not None else None,
             },
         }
-        if key == "agent__agent" and ("LayeredAStarQueueAware" in {planner_a, planner_b}):
-            # #region debug-point C:collision-sample
-            try:
-                _u,_s=DEBUG_FALLBACK_URL,DEBUG_SESSION_ID
-                with open(DEBUG_ENV_PATH,"r",encoding="utf-8") as _f:
-                    _c=_f.read()
-                for _l in _c.splitlines():
-                    if _l.startswith("DEBUG_SERVER_URL="): _u=_l.split("=",1)[1]
-                    elif _l.startswith("DEBUG_SESSION_ID="): _s=_l.split("=",1)[1]
-                urllib.request.urlopen(urllib.request.Request(_u,data=json.dumps({"sessionId":_s,"runId":"pre-fix","hypothesisId":"C","location":"experiment_logging.py:_build_collision_sample","msg":"[DEBUG] agent-agent collision sample captured","data":collision_data,"ts":0}).encode(),headers={"Content-Type":"application/json"}),timeout=0.2).read()
-            except Exception:
-                pass
-            # #endregion
-        if key == "agent__agent" and ("LayeredAStarBaselineTrafficAware" in {planner_a, planner_b}):
-            # #region debug-point C:baseline-collision-sample
-            try:
-                with open(BASELINE_COLLISION_DEBUG_LOG_PATH, "a", encoding="utf-8") as debug_file:
-                    debug_file.write(json.dumps({
-                        "sessionId": BASELINE_COLLISION_DEBUG_SESSION_ID,
-                        "runId": "pre-fix",
-                        "hypothesisId": "C",
-                        "location": "experiment_logging.py:_build_collision_sample",
-                        "msg": "[DEBUG] baseline agent-agent collision sample captured",
-                        "data": collision_data,
-                        "ts": 0,
-                    }, ensure_ascii=False) + "\n")
-            except Exception:
-                pass
-            try:
-                _u, _s = BASELINE_COLLISION_DEBUG_FALLBACK_URL, BASELINE_COLLISION_DEBUG_SESSION_ID
-                with open(BASELINE_COLLISION_DEBUG_ENV_PATH, "r", encoding="utf-8") as _f:
-                    _c = _f.read()
-                for _l in _c.splitlines():
-                    if _l.startswith("DEBUG_SERVER_URL="):
-                        _u = _l.split("=", 1)[1]
-                    elif _l.startswith("DEBUG_SESSION_ID="):
-                        _s = _l.split("=", 1)[1]
-                urllib.request.urlopen(urllib.request.Request(_u, data=json.dumps({
-                    "sessionId": _s,
-                    "runId": "pre-fix",
-                    "hypothesisId": "C",
-                    "location": "experiment_logging.py:_build_collision_sample",
-                    "msg": "[DEBUG] baseline agent-agent collision sample captured",
-                    "data": collision_data,
-                    "ts": 0,
-                }).encode(), headers={"Content-Type": "application/json"}), timeout=0.2).read()
-            except Exception:
-                pass
-            # #endregion
         return {
             "sim_time_seconds": round(self.simulator.get_simulator_time(), 3),
             "contact_type": key,

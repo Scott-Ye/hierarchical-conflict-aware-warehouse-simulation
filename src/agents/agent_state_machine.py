@@ -6,15 +6,8 @@
 States and State transitions are hardcoded for a specific logic
 @TODO Gary: Not urgent, Load configuration from json.
 """
-import json
-import urllib.request
 from enum import Enum
 from task_managers.task_manager import TaskType
-
-SAME_PORT_EXIT_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\same-port-exit.env"
-SAME_PORT_EXIT_DEBUG_FALLBACK_URL = "http://127.0.0.1:7777/event"
-SAME_PORT_EXIT_DEBUG_SESSION_ID = "same-port-exit"
-SAME_PORT_EXIT_DEBUG_LOG_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\trae-debug-log-same-port-exit.ndjson"
 
 class AgentState(Enum):
     IDLE = 0 # stopped and no task assigned
@@ -96,50 +89,7 @@ def go_for_next_loading_task(agent, server):
 
 
 def _debug_same_port_exit_event(agent, hypothesis_id, location, message, data):
-    try:
-        with open(SAME_PORT_EXIT_DEBUG_LOG_PATH, "a", encoding="utf-8") as debug_file:
-            debug_file.write(json.dumps({
-                "sessionId": SAME_PORT_EXIT_DEBUG_SESSION_ID,
-                "runId": "pre-fix",
-                "hypothesisId": hypothesis_id,
-                "location": location,
-                "msg": message,
-                "data": data,
-                "ts": 0,
-            }, ensure_ascii=False) + "\n")
-    except Exception:
-        pass
-    debug_url = SAME_PORT_EXIT_DEBUG_FALLBACK_URL
-    session_id = SAME_PORT_EXIT_DEBUG_SESSION_ID
-    try:
-        with open(SAME_PORT_EXIT_DEBUG_ENV_PATH, "r", encoding="utf-8") as env_file:
-            env_content = env_file.read()
-        for line in env_content.splitlines():
-            if line.startswith("DEBUG_SERVER_URL="):
-                debug_url = line.split("=", 1)[1]
-            elif line.startswith("DEBUG_SESSION_ID="):
-                session_id = line.split("=", 1)[1]
-    except Exception:
-        pass
-    try:
-        urllib.request.urlopen(
-            urllib.request.Request(
-                debug_url,
-                data=json.dumps({
-                    "sessionId": session_id,
-                    "runId": "pre-fix",
-                    "hypothesisId": hypothesis_id,
-                    "location": location,
-                    "msg": message,
-                    "data": data,
-                    "ts": 0,
-                }).encode(),
-                headers={"Content-Type": "application/json"},
-            ),
-            timeout=0.2,
-        ).read()
-    except Exception:
-        pass
+    return
 
 
 def approaching(agent, server):

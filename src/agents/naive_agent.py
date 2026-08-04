@@ -2,9 +2,7 @@
 # @author : xiaoyu.ge@dorabot.com
 # @brief : Implementation of a agent (e.g., mars vheicles) using naive strategy
 
-import json
 import time
-import urllib.request
 
 from agents.agent import *
 from agents.agent_state_machine import AgentState, move_if_next_slot_available
@@ -13,40 +11,6 @@ from global_planners.layered_astar_planner import LayeredAStar
 from representation.gridmap_a import GridmapWithNeighbors
 from random import *
 
-DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\v4-port-collision.env"
-DEBUG_FALLBACK_URL = "http://127.0.0.1:7778/event"
-DEBUG_SESSION_ID = "v4-port-collision"
-BASELINE_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\baseline-global-reservation.env"
-BASELINE_DEBUG_FALLBACK_URL = "http://127.0.0.1:7777/event"
-BASELINE_DEBUG_SESSION_ID = "baseline-global-reservation"
-GLOBAL_CHECK_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\global-no-double-stop.env"
-GLOBAL_CHECK_DEBUG_FALLBACK_URL = "http://127.0.0.1:7780/event"
-GLOBAL_CHECK_DEBUG_SESSION_ID = "global-no-double-stop"
-GUI_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\gui-global-slowdown.env"
-GUI_DEBUG_FALLBACK_URL = "http://127.0.0.1:7779/event"
-GUI_DEBUG_SESSION_ID = "gui-global-slowdown"
-SLOWDOWN_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\global-slowdown-cascade.env"
-SLOWDOWN_DEBUG_FALLBACK_URL = "http://127.0.0.1:7778/event"
-SLOWDOWN_DEBUG_SESSION_ID = "global-slowdown-cascade"
-COLLISION_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\baseline-traffic-collision.env"
-COLLISION_DEBUG_FALLBACK_URL = "http://127.0.0.1:7777/event"
-COLLISION_DEBUG_SESSION_ID = "baseline-traffic-collision"
-COLLISION_DEBUG_LOG_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\trae-debug-log-baseline-traffic-collision.ndjson"
-MIDMAP_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\baseline-midmap-collision.env"
-MIDMAP_DEBUG_FALLBACK_URL = "http://127.0.0.1:7777/event"
-MIDMAP_DEBUG_SESSION_ID = "baseline-midmap-collision"
-MIDMAP_DEBUG_LOG_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\trae-debug-log-baseline-midmap-collision.ndjson"
-DEADLOCK_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\baseline-deadlock-gui.env"
-DEADLOCK_DEBUG_FALLBACK_URL = "http://127.0.0.1:7777/event"
-DEADLOCK_DEBUG_SESSION_ID = "baseline-deadlock-gui"
-DEADLOCK_DEBUG_LOG_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\trae-debug-log-baseline-deadlock-gui.ndjson"
-MULTI_STOP_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\multi-stop-chain.env"
-MULTI_STOP_DEBUG_FALLBACK_URL = "http://127.0.0.1:7777/event"
-MULTI_STOP_DEBUG_SESSION_ID = "multi-stop-chain"
-MULTI_STOP_DEBUG_LOG_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\trae-debug-log-multi-stop-chain.ndjson"
-PORT_SPEED_DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\port-speed-replan.env"
-PORT_SPEED_DEBUG_FALLBACK_URL = "http://127.0.0.1:7781/event"
-PORT_SPEED_DEBUG_SESSION_ID = "port-speed-replan"
 BASELINE_DEADLOCK_RELEASE_REASONS = {
     "baseline_same_target_approach_hold",
     "baseline_same_port_queue_hold",
@@ -75,80 +39,11 @@ BASELINE_RUNTIME_ACTIVE_BACKOFF_MARGIN = 0.55
 BASELINE_REPLAN_STABILIZATION_STEPS = 8
 
 class NaiveAgent(Agent):
-    _DEBUG_ENDPOINT_UNAVAILABLE = object()
-    _debug_endpoint_cache = {}
-
-    def _resolve_debug_endpoint(self, cache_key, env_path, fallback_url, fallback_session_id):
-        cached = self._debug_endpoint_cache.get(cache_key, None)
-        if cached is self._DEBUG_ENDPOINT_UNAVAILABLE:
-            return None
-        if cached is not None:
-            return cached
-
-        try:
-            debug_url, session_id = fallback_url, fallback_session_id
-            debug_enabled = False
-            with open(env_path, "r", encoding="utf-8") as env_file:
-                env_content = env_file.read()
-            for line in env_content.splitlines():
-                if line.startswith("DEBUG_SERVER_URL="):
-                    debug_url = line.split("=", 1)[1]
-                elif line.startswith("DEBUG_SESSION_ID="):
-                    session_id = line.split("=", 1)[1]
-                elif line.startswith("DEBUG_HTTP_ENABLED="):
-                    debug_enabled = line.split("=", 1)[1].strip().lower() in {"1", "true", "yes", "on"}
-            if session_id == "gui-global-slowdown":
-                debug_enabled = True
-            if session_id in {COLLISION_DEBUG_SESSION_ID, PORT_SPEED_DEBUG_SESSION_ID}:
-                debug_enabled = True
-            endpoint = (debug_url, session_id) if debug_enabled else self._DEBUG_ENDPOINT_UNAVAILABLE
-        except Exception:
-            endpoint = self._DEBUG_ENDPOINT_UNAVAILABLE
-
-        self._debug_endpoint_cache[cache_key] = endpoint
-        if endpoint is self._DEBUG_ENDPOINT_UNAVAILABLE:
-            return None
-        return endpoint
-
     def _emit_debug_event(self, cache_key, env_path, fallback_url, fallback_session_id, hypothesis_id, location, message, data):
-        endpoint = self._resolve_debug_endpoint(cache_key, env_path, fallback_url, fallback_session_id)
-        if endpoint is None:
-            return
-
-        debug_url, session_id = endpoint
-        try:
-            urllib.request.urlopen(
-                urllib.request.Request(
-                    debug_url,
-                    data=json.dumps(
-                        {
-                            "sessionId": session_id,
-                            "runId": "pre-fix",
-                            "hypothesisId": hypothesis_id,
-                            "location": location,
-                            "msg": message,
-                            "data": data,
-                            "ts": 0,
-                        }
-                    ).encode(),
-                    headers={"Content-Type": "application/json"},
-                ),
-                timeout=0.2,
-            ).read()
-        except Exception:
-            self._debug_endpoint_cache[cache_key] = self._DEBUG_ENDPOINT_UNAVAILABLE
+        return
 
     def _debug_port_speed_event(self, hypothesis_id, location, message, data):
-        self._emit_debug_event(
-            "port_speed_replan",
-            PORT_SPEED_DEBUG_ENV_PATH,
-            PORT_SPEED_DEBUG_FALLBACK_URL,
-            PORT_SPEED_DEBUG_SESSION_ID,
-            hypothesis_id,
-            location,
-            message,
-            data,
-        )
+        return
 
     def _current_simulator_step(self):
         port = getattr(getattr(self, "task", None), "port", None)
@@ -180,8 +75,7 @@ class NaiveAgent(Agent):
         return current_signature == getattr(self, "_baseline_noop_replan_signature", None)
 
     def _should_debug_midmap_cruise_pair(self):
-        step = self._current_simulator_step()
-        return getattr(self, "id", None) in {1, 2} and step is not None and 165 <= step <= 180
+        return False
 
     def _update_runtime_state(self, next_state):
         if self.state != next_state:
@@ -290,162 +184,22 @@ class NaiveAgent(Agent):
             # #endregion
 
     def _debug_v4_event(self, hypothesis_id, location, message, data):
-        self._emit_debug_event(
-            "v4",
-            DEBUG_ENV_PATH,
-            DEBUG_FALLBACK_URL,
-            DEBUG_SESSION_ID,
-            hypothesis_id,
-            location,
-            message,
-            data,
-        )
+        return
 
     def _debug_baseline_event(self, hypothesis_id, location, message, data):
-        self._emit_debug_event(
-            "baseline",
-            BASELINE_DEBUG_ENV_PATH,
-            BASELINE_DEBUG_FALLBACK_URL,
-            BASELINE_DEBUG_SESSION_ID,
-            hypothesis_id,
-            location,
-            message,
-            data,
-        )
+        return
 
     def _debug_global_check_event(self, hypothesis_id, location, message, data):
-        self._emit_debug_event(
-            "global_check",
-            GLOBAL_CHECK_DEBUG_ENV_PATH,
-            GLOBAL_CHECK_DEBUG_FALLBACK_URL,
-            GLOBAL_CHECK_DEBUG_SESSION_ID,
-            hypothesis_id,
-            location,
-            message,
-            data,
-        )
-        try:
-            with open(MIDMAP_DEBUG_LOG_PATH, "a", encoding="utf-8") as debug_file:
-                debug_file.write(json.dumps({
-                    "sessionId": MIDMAP_DEBUG_SESSION_ID,
-                    "runId": "pre-fix",
-                    "hypothesisId": hypothesis_id,
-                    "location": location,
-                    "msg": message,
-                    "data": data,
-                    "ts": 0,
-                }, ensure_ascii=False) + "\n")
-        except Exception:
-            pass
-        self._emit_debug_event(
-            "midmap_global_check",
-            MIDMAP_DEBUG_ENV_PATH,
-            MIDMAP_DEBUG_FALLBACK_URL,
-            MIDMAP_DEBUG_SESSION_ID,
-            hypothesis_id,
-            location,
-            message,
-            data,
-        )
+        return
 
     def _debug_collision_event(self, hypothesis_id, location, message, data):
-        try:
-            with open(COLLISION_DEBUG_LOG_PATH, "a", encoding="utf-8") as debug_file:
-                debug_file.write(json.dumps({
-                    "sessionId": COLLISION_DEBUG_SESSION_ID,
-                    "runId": "pre-fix",
-                    "hypothesisId": hypothesis_id,
-                    "location": location,
-                    "msg": message,
-                    "data": data,
-                    "ts": 0,
-                }, ensure_ascii=False) + "\n")
-        except Exception:
-            pass
-        self._emit_debug_event(
-            "baseline_collision",
-            COLLISION_DEBUG_ENV_PATH,
-            COLLISION_DEBUG_FALLBACK_URL,
-            COLLISION_DEBUG_SESSION_ID,
-            hypothesis_id,
-            location,
-            message,
-            data,
-        )
-        self._emit_debug_event(
-            "midmap_collision",
-            MIDMAP_DEBUG_ENV_PATH,
-            MIDMAP_DEBUG_FALLBACK_URL,
-            MIDMAP_DEBUG_SESSION_ID,
-            hypothesis_id,
-            location,
-            message,
-            data,
-        )
+        return
 
     def _debug_deadlock_event(self, hypothesis_id, location, message, data):
-        debug_url, session_id = DEADLOCK_DEBUG_FALLBACK_URL, DEADLOCK_DEBUG_SESSION_ID
-        try:
-            with open(DEADLOCK_DEBUG_ENV_PATH, "r", encoding="utf-8") as env_file:
-                env_content = env_file.read()
-            for line in env_content.splitlines():
-                if line.startswith("DEBUG_SERVER_URL="):
-                    debug_url = line.split("=", 1)[1]
-                elif line.startswith("DEBUG_SESSION_ID="):
-                    session_id = line.split("=", 1)[1]
-        except Exception:
-            pass
-        payload = {
-            "sessionId": session_id,
-            "runId": "pre-fix",
-            "hypothesisId": hypothesis_id,
-            "location": location,
-            "msg": message,
-            "data": data,
-            "ts": 0,
-        }
-        try:
-            urllib.request.urlopen(
-                urllib.request.Request(
-                    debug_url,
-                    data=json.dumps(payload).encode(),
-                    headers={"Content-Type": "application/json"},
-                ),
-                timeout=0.2,
-            ).read()
-        except Exception:
-            pass
-        try:
-            with open(DEADLOCK_DEBUG_LOG_PATH, "a", encoding="utf-8") as debug_file:
-                debug_file.write(json.dumps(payload, ensure_ascii=False) + "\n")
-        except Exception:
-            pass
+        return
 
     def _debug_multi_stop_event(self, hypothesis_id, location, message, data):
-        payload = {
-            "sessionId": MULTI_STOP_DEBUG_SESSION_ID,
-            "runId": "pre-fix",
-            "hypothesisId": hypothesis_id,
-            "location": location,
-            "msg": message,
-            "data": data,
-            "ts": 0,
-        }
-        try:
-            with open(MULTI_STOP_DEBUG_LOG_PATH, "a", encoding="utf-8") as debug_file:
-                debug_file.write(json.dumps(payload, ensure_ascii=False) + "\n")
-        except Exception:
-            pass
-        self._emit_debug_event(
-            "multi_stop",
-            MULTI_STOP_DEBUG_ENV_PATH,
-            MULTI_STOP_DEBUG_FALLBACK_URL,
-            MULTI_STOP_DEBUG_SESSION_ID,
-            hypothesis_id,
-            location,
-            message,
-            data,
-        )
+        return
 
     def _is_baseline_traffic_aware(self):
         return type(getattr(self, "global_planner", None)).__name__ == "LayeredAStarBaselineTrafficAware"

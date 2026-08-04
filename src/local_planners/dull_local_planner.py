@@ -4,19 +4,11 @@
 @author: cenrong.dai@dorabot.com
 @brief : local planner which follows the waypoint of the given global_planner_path strictly
 """
-import json
-import urllib.request
 from geometry import Vector, compute_direction, Point
 from .local_planner import LocalPlanner
 from math import sqrt
 
-DEBUG_ENV_PATH = r"c:\Users\INT\Desktop\Summer IP\dorabot_minions-master\.dbg\v4-port-collision.env"
-DEBUG_FALLBACK_URL = "http://127.0.0.1:7778/event"
-DEBUG_SESSION_ID = "v4-port-collision"
-
 class DullPlanner(LocalPlanner):
-    _DEBUG_ENDPOINT_DISABLED = object()
-    _debug_endpoint_cache = {}
     """
 
     Keyword arguments:
@@ -28,61 +20,8 @@ class DullPlanner(LocalPlanner):
     velcocity -- velocity command [only linear velocity returned in current version]
     local_path -- optional
     """
-    def _resolve_debug_endpoint(self):
-        cached = self._debug_endpoint_cache.get("v4", None)
-        if cached is self._DEBUG_ENDPOINT_DISABLED:
-            return None
-        if cached is not None:
-            return cached
-
-        try:
-            debug_url = DEBUG_FALLBACK_URL
-            session_id = DEBUG_SESSION_ID
-            debug_enabled = False
-            with open(DEBUG_ENV_PATH, "r", encoding="utf-8") as env_file:
-                env_content = env_file.read()
-            for line in env_content.splitlines():
-                if line.startswith("DEBUG_SERVER_URL="):
-                    debug_url = line.split("=", 1)[1]
-                elif line.startswith("DEBUG_SESSION_ID="):
-                    session_id = line.split("=", 1)[1]
-                elif line.startswith("DEBUG_HTTP_ENABLED="):
-                    debug_enabled = line.split("=", 1)[1].strip().lower() in {"1", "true", "yes", "on"}
-            endpoint = (debug_url, session_id) if debug_enabled else self._DEBUG_ENDPOINT_DISABLED
-        except Exception:
-            endpoint = self._DEBUG_ENDPOINT_DISABLED
-
-        self._debug_endpoint_cache["v4"] = endpoint
-        if endpoint is self._DEBUG_ENDPOINT_DISABLED:
-            return None
-        return endpoint
-
     def _debug_v4_event(self, hypothesis_id, location, message, data):
-        endpoint = self._resolve_debug_endpoint()
-        if endpoint is None:
-            return
-        debug_url, session_id = endpoint
-        try:
-            urllib.request.urlopen(
-                urllib.request.Request(
-                    debug_url,
-                    data=json.dumps(
-                        {
-                            "sessionId": session_id,
-                            "runId": "pre-fix",
-                            "hypothesisId": hypothesis_id,
-                            "location": location,
-                            "msg": message,
-                            "data": data,
-                            "ts": 0,
-                        }
-                    ).encode(),
-                    headers={"Content-Type": "application/json"},
-                ),
-                timeout=0.2,
-            ).read()
-        except Exception:
-            self._debug_endpoint_cache["v4"] = self._DEBUG_ENDPOINT_DISABLED
+        return
 
     def compute_plan(self, position, velocity, gridmap, sensor_observation, global_planner_path):
         local_path = []
