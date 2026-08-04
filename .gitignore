@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+.dbg/
+Thumbs.db
+experiments/results/archive/

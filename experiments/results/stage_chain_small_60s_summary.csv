@@ -1,0 +1,97 @@
+global_planner,local_planner,task_manager,status,exit_code,runtime_seconds,packages_delivered,pph,total_distance_travelled,global_plan_calls,replan_events,total_collision_events,agent_agent_collision_events,agent_wall_collision_events,summary_file,stdout_tail
+LayeredAStar,DullPlanner,NaiveTaskManager,success,0,13.313,4,240.0,147.689,123,100,8,8,0,stage_chain_small_60s_LayeredAStar_DullPlanner_NaiveTaskManager.json,"Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+8 seconds passed in real world
+PPH is 240.0 now
+---------------------------------------------------------------------
+Current PPH: 240.0
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 4)
+('PPH:', 240.0)"
+LayeredAStar,VirtualForcePlanner,NaiveTaskManager,success,0,20.541,0,0.0,9.625,571,16,0,0,0,stage_chain_small_60s_LayeredAStar_VirtualForcePlanner_NaiveTaskManager.json,"pygame 2.6.1 (SDL 2.28.4, Python 3.10.14)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+15 seconds passed in real world
+PPH is 0.0 now
+---------------------------------------------------------------------
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 0)
+('PPH:', 0.0)"
+LayeredAStarCollisionAware,DullPlanner,NaiveTaskManager,success,0,28.145,5,300.0,144.723,229,203,0,0,0,stage_chain_small_60s_LayeredAStarCollisionAware_DullPlanner_NaiveTaskManager.json,"Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+18 seconds passed in real world
+PPH is 300.0 now
+---------------------------------------------------------------------
+Current PPH: 300.0
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 5)
+('PPH:', 300.0)"
+LayeredAStarCollisionAware,VirtualForcePlanner,NaiveTaskManager,success,0,37.129,0,0.0,6.967,1139,1135,0,0,0,stage_chain_small_60s_LayeredAStarCollisionAware_VirtualForcePlanner_NaiveTaskManager.json,"pygame 2.6.1 (SDL 2.28.4, Python 3.10.14)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+27 seconds passed in real world
+PPH is 0.0 now
+---------------------------------------------------------------------
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 0)
+('PPH:', 0.0)"
+LayeredAStarReservationAware,DullPlanner,NaiveTaskManager,success,0,50.961,0,0.0,9.81,1130,1124,0,0,0,stage_chain_small_60s_LayeredAStarReservationAware_DullPlanner_NaiveTaskManager.json,"pygame 2.6.1 (SDL 2.28.4, Python 3.10.14)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+38 seconds passed in real world
+PPH is 0.0 now
+---------------------------------------------------------------------
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 0)
+('PPH:', 0.0)"
+LayeredAStarReservationAware,VirtualForcePlanner,NaiveTaskManager,success,0,35.426,0,0.0,6.517,1160,1157,0,0,0,stage_chain_small_60s_LayeredAStarReservationAware_VirtualForcePlanner_NaiveTaskManager.json,"pygame 2.6.1 (SDL 2.28.4, Python 3.10.14)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+24 seconds passed in real world
+PPH is 0.0 now
+---------------------------------------------------------------------
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 0)
+('PPH:', 0.0)"
+LayeredAStarQueueAware,DullPlanner,NaiveTaskManager,success,0,40.751,1,60.0,33.555,973,965,1,1,0,stage_chain_small_60s_LayeredAStarQueueAware_DullPlanner_NaiveTaskManager.json,"Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+30 seconds passed in real world
+PPH is 60.0 now
+---------------------------------------------------------------------
+Current PPH: 60.0
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 1)
+('PPH:', 60.0)"
+LayeredAStarQueueAware,VirtualForcePlanner,NaiveTaskManager,success,0,42.435,0,0.0,6.967,1137,1133,0,0,0,stage_chain_small_60s_LayeredAStarQueueAware_VirtualForcePlanner_NaiveTaskManager.json,"pygame 2.6.1 (SDL 2.28.4, Python 3.10.14)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+29 seconds passed in real world
+PPH is 0.0 now
+---------------------------------------------------------------------
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 0)
+('PPH:', 0.0)"

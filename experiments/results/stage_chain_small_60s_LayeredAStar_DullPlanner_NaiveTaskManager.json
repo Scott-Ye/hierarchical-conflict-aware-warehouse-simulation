@@ -1,0 +1,346 @@
+{
+  "agent_agent_collision_events": 8,
+  "agent_count": 2,
+  "agent_wall_collision_events": 0,
+  "avg_distance_travelled": 73.844,
+  "avg_global_plan_calls": 61.5,
+  "avg_replan_events": 50.0,
+  "cmd_args": {
+    "agent_details": false,
+    "agents_num": 2,
+    "cruise_speed": null,
+    "default": true,
+    "free": false,
+    "global_planner": "LayeredAStar",
+    "import_map": null,
+    "local_planner": "DullPlanner",
+    "meter_size": [
+      12,
+      12
+    ],
+    "ports_num": [
+      1,
+      1
+    ],
+    "record_dir": "C:\\Users\\INT\\Desktop\\Summer IP\\dorabot_minions-master\\experiments\\results",
+    "record_tag": "stage_chain_small_60s_LayeredAStar_DullPlanner_NaiveTaskManager",
+    "resolution": 1,
+    "save_map": null,
+    "seed": null,
+    "step": 10,
+    "stuck_recovery": false,
+    "stuck_recovery_threshold": 10,
+    "task_manager": "NaiveTaskManager",
+    "time": 1.0,
+    "title": "Dorabot Minions"
+  },
+  "collision_event_counts": {
+    "agent__agent": 8
+  },
+  "collision_samples": [
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 0,
+        "position": [
+          8.84,
+          3.69
+        ],
+        "state": "QUEUING",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 1,
+        "position": [
+          8.62,
+          3.22
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 24.8
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 0,
+        "position": [
+          8.75,
+          3.81
+        ],
+        "state": "QUEUING",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 1,
+        "position": [
+          8.63,
+          3.28
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 24.9
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 0,
+        "position": [
+          8.64,
+          3.92
+        ],
+        "state": "QUEUING",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 1,
+        "position": [
+          8.66,
+          3.34
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 25.0
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 0,
+        "position": [
+          8.36,
+          4.01
+        ],
+        "state": "QUEUING",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 1,
+        "position": [
+          8.78,
+          3.54
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 25.2
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 0,
+        "position": [
+          3.41,
+          9.03
+        ],
+        "state": "QUEUING",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 1,
+        "position": [
+          3.0,
+          8.55
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 38.1
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 0,
+        "position": [
+          8.72,
+          3.61
+        ],
+        "state": "QUEUING",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 1,
+        "position": [
+          8.64,
+          3.22
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 50.3
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 0,
+        "position": [
+          8.66,
+          3.8
+        ],
+        "state": "QUEUING",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 1,
+        "position": [
+          8.63,
+          3.24
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 50.4
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 0,
+        "position": [
+          8.55,
+          3.91
+        ],
+        "state": "QUEUING",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 1,
+        "position": [
+          8.66,
+          3.31
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 50.5
+    }
+  ],
+  "contact_frame_counts": {
+    "agent__agent": 8
+  },
+  "global_plan_calls": 123,
+  "global_planner": "LayeredAStar",
+  "headless": true,
+  "loading_port_count": 1,
+  "local_planner": "DullPlanner",
+  "map_height": 12,
+  "map_width": 12,
+  "max_distance_travelled": 74.211,
+  "max_queue_lengths": {
+    "0": 0
+  },
+  "packages_delivered": 4,
+  "pph": 240.0,
+  "real_runtime_seconds": 8.523,
+  "record_tag": "stage_chain_small_60s_LayeredAStar_DullPlanner_NaiveTaskManager",
+  "replan_events": 100,
+  "resolution": 1,
+  "run_id": "20260804T141649Z_e8c2399e",
+  "simulation_minutes_target": 1.0,
+  "simulation_seconds": 60.0,
+  "state_step_counts": {
+    "CRUISE": 656,
+    "LOADING": 220,
+    "QUEUING": 326
+  },
+  "state_time_ratios": {
+    "CRUISE": 0.5458,
+    "LOADING": 0.183,
+    "QUEUING": 0.2712
+  },
+  "steps_per_second": 10,
+  "task_manager": "NaiveTaskManager",
+  "timeline": [
+    {
+      "current_states": {
+        "CRUISE": 1,
+        "LOADING": 1
+      },
+      "packages_delivered": 0,
+      "pph": 0.0,
+      "sim_time_seconds": 10.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 2
+      },
+      "packages_delivered": 2,
+      "pph": 360.0,
+      "sim_time_seconds": 20.0
+    },
+    {
+      "current_states": {
+        "LOADING": 1,
+        "QUEUING": 1
+      },
+      "packages_delivered": 2,
+      "pph": 240.0,
+      "sim_time_seconds": 30.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 1,
+        "LOADING": 1
+      },
+      "packages_delivered": 3,
+      "pph": 270.0,
+      "sim_time_seconds": 40.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 1,
+        "QUEUING": 1
+      },
+      "packages_delivered": 4,
+      "pph": 288.0,
+      "sim_time_seconds": 50.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 1,
+        "QUEUING": 1
+      },
+      "packages_delivered": 4,
+      "pph": 240.0,
+      "sim_time_seconds": 60.0
+    }
+  ],
+  "timestamp_utc": "2026-08-04T14:16:57.697996Z",
+  "title": "Dorabot Minions",
+  "total_collision_events": 8,
+  "total_contact_frames": 8,
+  "total_distance_travelled": 147.689,
+  "unloading_port_count": 1
+}

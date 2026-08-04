@@ -1,0 +1,13 @@
+global_planner,local_planner,task_manager,status,exit_code,runtime_seconds,packages_delivered,pph,total_distance_travelled,global_plan_calls,replan_events,total_collision_events,agent_agent_collision_events,agent_wall_collision_events,summary_file,stdout_tail
+LayeredAStarBaselineTrafficAware,DullPlanner,NaiveTaskManager,success,0,61.191,6,360.0,479.93,316,279,0,0,0,stage_chain_bta_high_60s_LayeredAStarBaselineTrafficAware_DullPlanner_NaiveTaskManager.json,"Hello from the pygame community. https://www.pygame.org/contribute.html
+---------------------------------------------------------------------
+The duration will be 60.0 seconds or 1.0 minutes in simulation world
+---------------------------------------------------------------------
+1.0 minutes passed in simulation world
+57 seconds passed in real world
+PPH is 360.0 now
+---------------------------------------------------------------------
+Current PPH: 360.0
+('Time in seconds:', 60.0)
+('Number of Packages Delivered:', 6)
+('PPH:', 360.0)"

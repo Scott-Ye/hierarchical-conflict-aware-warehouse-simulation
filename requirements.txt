@@ -1,0 +1,7 @@
+numpy
+matplotlib
+pygame
+box2d-py
+Shapely
+protobuf
+cmd2

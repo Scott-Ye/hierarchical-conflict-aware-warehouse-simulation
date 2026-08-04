@@ -1,0 +1,763 @@
+{
+  "agent_agent_collision_events": 949,
+  "agent_count": 6,
+  "agent_wall_collision_events": 0,
+  "avg_distance_travelled": 60.166,
+  "avg_global_plan_calls": 352.833,
+  "avg_replan_events": 347.0,
+  "cmd_args": {
+    "agent_details": false,
+    "agents_num": 6,
+    "cruise_speed": null,
+    "default": true,
+    "free": false,
+    "global_planner": "LayeredAStar",
+    "import_map": null,
+    "local_planner": "DullPlanner",
+    "meter_size": [
+      24,
+      24
+    ],
+    "ports_num": [
+      3,
+      3
+    ],
+    "record_dir": "C:\\Users\\INT\\Desktop\\Summer IP\\dorabot_minions-master\\experiments\\results",
+    "record_tag": "stage_chain_high_60s_LayeredAStar_DullPlanner_NaiveTaskManager",
+    "resolution": 1,
+    "save_map": null,
+    "seed": null,
+    "step": 20,
+    "stuck_recovery": false,
+    "stuck_recovery_threshold": 10,
+    "task_manager": "NaiveTaskManager",
+    "time": 1.0,
+    "title": "Dorabot Minions"
+  },
+  "collision_event_counts": {
+    "agent__agent": 949
+  },
+  "collision_samples": [
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.13,
+          4.25
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.68,
+          4.6
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.35
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.15,
+          4.23
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.68,
+          4.63
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.4
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.16,
+          4.24
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.69,
+          4.63
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.45
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.17,
+          4.24
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.7,
+          4.64
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.5
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.18,
+          4.24
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.7,
+          4.64
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.55
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.19,
+          4.24
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.71,
+          4.64
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.6
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.19,
+          4.25
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.72,
+          4.64
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.65
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.2,
+          4.25
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.72,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.7
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.18,
+          4.32
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.58
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.8
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.22,
+          4.26
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.74,
+          4.64
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.85
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.22,
+          4.26
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.74,
+          4.64
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.9
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.22,
+          4.26
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.74,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 13.95
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.23,
+          4.26
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.75,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.0
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.23,
+          4.26
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.75,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.05
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.23,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.75,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.1
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.23,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.75,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.15
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.24,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.2
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.24,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.25
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.24,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.3
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.24,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.35
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.24,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.4
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.24,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.45
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.24,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.5
+    },
+    {
+      "contact_type": "agent__agent",
+      "entity_a": {
+        "id": 1,
+        "position": [
+          7.24,
+          4.27
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_UNLOADING_PORT",
+        "type": "agent"
+      },
+      "entity_b": {
+        "id": 2,
+        "position": [
+          6.76,
+          4.65
+        ],
+        "state": "CRUISE",
+        "stopping": false,
+        "task": "GO_TO_LOADING_PORT",
+        "type": "agent"
+      },
+      "sim_time_seconds": 14.55
+    }
+  ],
+  "contact_frame_counts": {
+    "agent__agent": 951
+  },
+  "global_plan_calls": 2117,
+  "global_planner": "LayeredAStar",
+  "headless": true,
+  "loading_port_count": 3,
+  "local_planner": "DullPlanner",
+  "map_height": 24,
+  "map_width": 24,
+  "max_distance_travelled": 81.056,
+  "max_queue_lengths": {
+    "0": 0,
+    "1": 0,
+    "2": 0
+  },
+  "packages_delivered": 5,
+  "pph": 300.0,
+  "real_runtime_seconds": 105.051,
+  "record_tag": "stage_chain_high_60s_LayeredAStar_DullPlanner_NaiveTaskManager",
+  "replan_events": 2082,
+  "resolution": 1,
+  "run_id": "20260804T141651Z_1344ac1d",
+  "simulation_minutes_target": 1.0,
+  "simulation_seconds": 60.0,
+  "state_step_counts": {
+    "CRUISE": 6061,
+    "LOADING": 586,
+    "QUEUING": 559
+  },
+  "state_time_ratios": {
+    "CRUISE": 0.8411,
+    "LOADING": 0.0813,
+    "QUEUING": 0.0776
+  },
+  "steps_per_second": 20,
+  "task_manager": "NaiveTaskManager",
+  "timeline": [
+    {
+      "current_states": {
+        "CRUISE": 5,
+        "QUEUING": 1
+      },
+      "packages_delivered": 0,
+      "pph": 0.0,
+      "sim_time_seconds": 10.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 5,
+        "LOADING": 1
+      },
+      "packages_delivered": 0,
+      "pph": 0.0,
+      "sim_time_seconds": 20.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 5,
+        "QUEUING": 1
+      },
+      "packages_delivered": 1,
+      "pph": 120.0,
+      "sim_time_seconds": 30.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 5,
+        "QUEUING": 1
+      },
+      "packages_delivered": 4,
+      "pph": 360.0,
+      "sim_time_seconds": 40.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 6
+      },
+      "packages_delivered": 5,
+      "pph": 360.0,
+      "sim_time_seconds": 50.0
+    },
+    {
+      "current_states": {
+        "CRUISE": 6
+      },
+      "packages_delivered": 5,
+      "pph": 300.0,
+      "sim_time_seconds": 60.0
+    }
+  ],
+  "timestamp_utc": "2026-08-04T14:18:36.667520Z",
+  "title": "Dorabot Minions",
+  "total_collision_events": 949,
+  "total_contact_frames": 951,
+  "total_distance_travelled": 360.995,
+  "unloading_port_count": 3
+}
